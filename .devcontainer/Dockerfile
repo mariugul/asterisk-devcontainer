@@ -29,4 +29,6 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     alembic                     \
     python3                     \
     python3-pip                 \
-    ufw
+    # UFW doesn't work in WSL
+    ufw                         \ 
+    debconf-utils

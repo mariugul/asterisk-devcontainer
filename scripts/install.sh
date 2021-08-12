@@ -18,13 +18,16 @@ source modules/asterisk_download.sh
 # Version 18 is the latest LTS version.
 asterisk_version='18'
 
+# Path to where Asterisk will be installed
+install_path="/usr/local/src"
+
 install () {
     python_prerequisites
     upgrade_apt_packages
-    useradd_asterisk
     postgresql_setup
-    asterisk_download ${asterisk_version}
-    asterisk_install  ${asterisk_version}
+    asterisk_download ${asterisk_version} ${install_path}
+    asterisk_install  ${asterisk_version} ${install_path}
+    useradd_asterisk
     asterisk_start
 }
 
