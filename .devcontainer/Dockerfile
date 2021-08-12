@@ -31,4 +31,6 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     python3-pip                 \
     # UFW doesn't work in WSL
     ufw                         \ 
-    debconf-utils
+    debconf-utils               \
+    tree                        \
+    vim
