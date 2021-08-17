@@ -32,6 +32,13 @@ print_green() {
     printf "${Green}$1${NC}\n"
 }
 
+# Converts seconds to hh:mm:ss
+seconds_to_time_format () {
+    local seconds=$1
+    printf '%02dh:%02dm:%02ds\n' $((${seconds}/3600)) $((${seconds}%3600/60)) $((${seconds}%60))
+    printf "\n"
+}
+
 # Save the start time/date of script
 start_time=`date +%s`
 
@@ -48,8 +55,9 @@ log_stop_time() {
 
     end_time=`date +%s`
     runtime=$((end_time-start_time))
-    
-    echo "Total run time: ${runtime}s"
+
+    printf "Total run time: "
+    seconds_to_time_format ${runtime}
 }
 
 
