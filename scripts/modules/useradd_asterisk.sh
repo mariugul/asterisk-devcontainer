@@ -15,15 +15,15 @@ useradd_asterisk() {
         print_error "User exists already."
     else
         # Create user and add permissions
-        sudo groupadd asterisk                                          && \
-        sudo useradd -r -d /var/lib/asterisk -g asterisk asterisk       && \
-        sudo usermod -aG audio,dialout asterisk                         && \
-        sudo chown -R asterisk.asterisk /etc/asterisk                   && \
-        sudo chown -R asterisk.asterisk /var/{lib,log,spool}/asterisk   && \
-        sudo chown -R asterisk.asterisk /usr/lib/asterisk               && \
+        sudo groupadd asterisk                                          
+        sudo useradd -r -d /var/lib/asterisk -g asterisk asterisk       
+        sudo usermod -aG audio,dialout asterisk                         
+        sudo chown -R asterisk.asterisk /etc/asterisk                   
+        sudo chown -R asterisk.asterisk /var/{lib,log,spool}/asterisk   
+        sudo chown -R asterisk.asterisk /usr/lib/asterisk               
         
         
-        print_note "Enter password for 'asterisk' user"                 && \
+        print_note "Enter password for 'asterisk' user"                 
         sudo passwd asterisk                     
     fi
 
