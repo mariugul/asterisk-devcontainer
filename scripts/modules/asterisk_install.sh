@@ -25,6 +25,7 @@ asterisk_install() {
     
     # The CLI to run instead of interactive menuselect
     echo "Run menuselect"        && \
+    make menuselect.makeopts     && \ # This makes menuselect accessible from CLI
     menuselect/menuselect           \
     --enable codec_opus             \
     --enable codec_silk             \
@@ -40,22 +41,22 @@ asterisk_install() {
 
     # ------------------------------------------------------------
     # Build Asterisk
-    echo "Run 'make'"                   && \
-    sudo make -j12                      && \
+    echo "Run 'make'"                                   && \
+    sudo make -j12                                      && \
 
     # Install Asterisk 
-    echo "Run 'make install'"           && \
-    sudo make install                   && \
+    echo "Run 'make install'"                           && \
+    sudo make install WGET_EXTRA_ARGS="--no-verbose"    && \
 
     # Make basic config files
-    echo "Run 'make basic-pbx'"         && \
-    sudo make basic-pbx                 && \
+    echo "Run 'make basic-pbx'"                         && \
+    sudo make basic-pbx                                 && \
 
     # Optionally install documentation
     # sudo make progdocs -j12 && \
 
     # Install configs
-    echo "Run 'make config and ldconfig'" && \
+    echo "Run 'make config and ldconfig'"               && \
     sudo make config && sudo ldconfig
 
     is_error $?
