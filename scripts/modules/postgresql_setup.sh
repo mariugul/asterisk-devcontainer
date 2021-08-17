@@ -33,11 +33,11 @@ postgresql_setup() {
     print_green "\n'asterisk' password was updated"
 
     # Create asterisk database
-    # echo "SELECT 'CREATE DATABASE asterisk WITH OWNER asterisk' WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'asterisk')\gexec" | sudo -u postgres -- psql -d postgres
+    echo "SELECT 'CREATE DATABASE asterisk WITH OWNER asterisk' WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'asterisk')\gexec" | sudo -u postgres -- psql -d postgres
     
     # Check for successful creation
-    # echo "Database 'asterisk':"
-    # sudo -u postgres -H -- psql -d postgres -c "SELECT FROM pg_database WHERE datname = 'asterisk'"
+    echo "Database 'asterisk':"
+    sudo -u postgres -H -- psql -d postgres -c "SELECT FROM pg_database WHERE datname = 'asterisk'"
 
     # Print status of the commands
     is_error $?

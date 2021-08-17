@@ -15,7 +15,7 @@ asterisk_start() {
 
     # Start Asterisk and print the service status
     printf "Starting Asterisk..."
-    sudo service asterisk start
+    sudo service asterisk restart
 
     # Check asterisk run status
     if ps ax | grep -v grep | grep "asterisk" > /dev/null
