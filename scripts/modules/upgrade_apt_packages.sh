@@ -6,7 +6,10 @@ source ./helpers/print_output.sh
 
 upgrade_apt_packages() {
     print_header "Update packages list and upgrade them"
-    sudo apt update                                     
-    sudo apt upgrade -y                                 
-    print_done                                          
+    
+    sudo apt-get update && \                                
+    sudo apt-get upgrade -y                                 
+    
+    # Print status of the commands
+    is_error $?                             
 }

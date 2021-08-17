@@ -15,13 +15,14 @@ source modules/asterisk_start.sh
 source modules/asterisk_download.sh
 
 # Choose which Asterisk version to install between 16 and 18. 
-# Version 18 is the latest LTS version.
+# Version 18 is the latest LTS version as of the year 2021.
 asterisk_version='18'
 
-# Path to where Asterisk will be installed
+# Path to where Asterisk will be installed.
 install_path="/usr/local/src"
 
-install () {
+install() {
+    log_start_time
     python_prerequisites
     upgrade_apt_packages
     postgresql_setup
@@ -29,6 +30,7 @@ install () {
     asterisk_install  ${asterisk_version} ${install_path}
     useradd_asterisk
     asterisk_start
+    log_stop_time
 }
 
 install

@@ -10,14 +10,22 @@ source ./helpers/print_output.sh
 useradd_asterisk() {
     print_header "Creating Asterisk user with priviliges."
 
-    sudo groupadd asterisk
-    sudo useradd -r -d /var/lib/asterisk -g asterisk asterisk
-    sudo usermod -aG audio,dialout asterisk
-    sudo chown -R asterisk.asterisk /etc/asterisk
-    sudo chown -R asterisk.asterisk /var/{lib,log,spool}/asterisk
-    sudo chown -R asterisk.asterisk /usr/lib/asterisk
+    # Check if user has been created already
+    if id "asterisk" &>/dev/null; then
+        print_error "User exists already."
+    else
+        # Create user and add permissions
+        sudo groupadd asterisk                                          && \
+        sudo useradd -r -d /var/lib/asterisk -g asterisk asterisk       && \
+        sudo usermod -aG audio,dialout asterisk                         && \
+        sudo chown -R asterisk.asterisk /etc/asterisk                   && \
+        sudo chown -R asterisk.asterisk /var/{lib,log,spool}/asterisk   && \
+        sudo chown -R asterisk.asterisk /usr/lib/asterisk               && \
+        
+        
+        print_note "Enter password for 'asterisk' user"                 && \
+        sudo passwd asterisk                     
+    fi
 
-    print_note "Enter password for 'asterisk' user"
-    sudo passwd asterisk
-    print_done
+    is_error $?
 }

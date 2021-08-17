@@ -10,7 +10,7 @@ python_prerequisites() {
     print_header "Installing Python Virtual Environment, pip and psycopg2"
 
     # Install Python Virtual Env
-    sudo apt install -y python3.8-venv  && \
+    sudo apt-get install -y python3.8-venv  && \
     python3 -m venv tutorial-env        && \
     source tutorial-env/bin/activate    && \
 
@@ -18,5 +18,6 @@ python_prerequisites() {
     pip install --upgrade pip           && \
     pip install psycopg2-binary
 
-    print_done
+    # Print status of the commands
+    is_error $?
 }

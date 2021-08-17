@@ -12,18 +12,19 @@ asterisk_install() {
     print_header "Installing Asterisk"
 
     # Run asterisk prerequisites install script
-    sudo /${install_path}/asterisk-${version}*/contrib/scripts/install_prereq install
+    sudo /${install_path}/asterisk-${version}*/contrib/scripts/install_prereq install && \
 
     # Configure Asterisk
     cd /${install_path}/asterisk-${version}*/ && \
-    sudo ./configure                    
+    sudo ./configure                          && \
 
     # Menuselect options
     # ------------------------------------------------------------
     # Setup menu options
-    # sudo make menuselect  # Run this command instead of the below CLI to get an interactive shell
-
+    # sudo make menuselect       && \  # Run this command instead of the below CLI to get an interactive shell
+    
     # The CLI to run instead of interactive menuselect
+    echo "Run menuselect"        && \
     menuselect/menuselect           \
     --enable codec_opus             \
     --enable codec_silk             \
@@ -35,23 +36,27 @@ asterisk_install() {
     --enable CORE-SOUNDS-EN-G722    \
     --enable EXTRA-SOUNDS-EN-WAV    \
     --enable EXTRA-SOUNDS-EN-G722   \
-    menuselect.makeopts
+    menuselect.makeopts          && \
 
     # ------------------------------------------------------------
     # Build Asterisk
+    echo "Run 'make'"                   && \
     sudo make -j12                      && \
 
     # Install Asterisk 
+    echo "Run 'make install'"           && \
     sudo make install                   && \
 
     # Make basic config files
+    echo "Run 'make basic-pbx'"         && \
     sudo make basic-pbx                 && \
 
     # Optionally install documentation
     # sudo make progdocs -j12 && \
 
     # Install configs
+    echo "Run 'make config and ldconfig'" && \
     sudo make config && sudo ldconfig
 
-    print_done
+    is_error $?
 }
