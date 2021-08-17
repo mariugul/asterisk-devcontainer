@@ -1,1 +1,0 @@
-CREATE DATABASE asterisk WITH OWNER asterisk
