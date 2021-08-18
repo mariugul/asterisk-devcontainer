@@ -26,7 +26,7 @@ asterisk_install() {
     # The CLI to run instead of interactive menuselect
     echo "Run menuselect"        && \
     make menuselect.makeopts     && \ # This makes menuselect accessible from CLI
-    menuselect/menuselect           \
+    sudo menuselect/menuselect      \
     --enable codec_opus             \
     --enable codec_silk             \
     --enable codec_siren7           \
