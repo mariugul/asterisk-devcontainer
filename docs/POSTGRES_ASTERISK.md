@@ -1,6 +1,7 @@
 # Realtime Database Configuration
 Asterisk can read configuration files from a database. This guide shows how to do that with PostgreSQL in Ubuntu 20.04 LTS.
 
+> Check out this article for setting up realtime postgres with Asterisk: http://www.asteriskdocs.org/en/3rd_Edition/asterisk-book-html-chunk/managing_databases.html
 ## Install PostgreSQL
 
 ```
