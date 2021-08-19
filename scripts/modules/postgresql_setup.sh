@@ -36,8 +36,18 @@ postgresql_setup() {
     echo "SELECT 'CREATE DATABASE asterisk WITH OWNER asterisk' WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'asterisk')\gexec" | sudo -u postgres -- psql -d postgres
     
     # Check for successful creation
+    # TODO: Implement a check
     echo "Database 'asterisk':"
     sudo -u postgres -H -- psql -d postgres -c "SELECT FROM pg_database WHERE datname = 'asterisk'"
+
+    # TODO 
+    # Populate the database with Alembic
+
+    # TODO 
+    # Insert all values necesarry for hello-world 
+
+    # TODO
+    # ODBC SETUP. Maybe its own module?
 
     # Print status of the commands
     is_error $?

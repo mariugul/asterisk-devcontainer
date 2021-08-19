@@ -23,12 +23,12 @@ install_path="/usr/local/src"
 
 install() {
     log_start_time
-    python_prerequisites
     upgrade_apt_packages
-    postgresql_setup
+    python_prerequisites
     asterisk_download ${asterisk_version} ${install_path}
     asterisk_install  ${asterisk_version} ${install_path}
     useradd_asterisk
+    postgresql_setup
     asterisk_start
     log_stop_time
 }
