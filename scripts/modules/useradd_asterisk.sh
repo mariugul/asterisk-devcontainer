@@ -17,11 +17,13 @@ useradd_asterisk() {
         # Create user and add permissions
         sudo groupadd asterisk                                          
         sudo useradd -r -d /var/lib/asterisk -g asterisk asterisk       
-        sudo usermod -aG audio,dialout asterisk                         
+        sudo usermod -aG audio,dialout asterisk  
+        sudo mkdir /home/asterisk/
+
+        sudo chown -R asterisk.asterisk /home/asterisk                      
         sudo chown -R asterisk.asterisk /etc/asterisk                   
         sudo chown -R asterisk.asterisk /var/{lib,log,spool}/asterisk   
         sudo chown -R asterisk.asterisk /usr/lib/asterisk               
-        
         
         print_note "Enter password for 'asterisk' user"                 
         sudo passwd asterisk                     
@@ -29,3 +31,10 @@ useradd_asterisk() {
 
     is_error $?
 }
+
+# New user add:
+# adduser --sytem --group --home /var/lib/asterisk testuser5
+# sudo chown -R asterisk.asterisk /etc/asterisk   
+# chmod 664 /etc/asterisk
+# sudo chown -R asterisk:asterisk {/etc,/var/lib,/var/spool,/var/log,/var/run}/asterisk
+# Check out if tmpfiles.d is necesarry for Asterisk to create a socket.
